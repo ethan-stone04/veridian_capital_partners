@@ -1,2 +1,3 @@
-# veridian_capital_partners
+# Veridian Capital Partners
 A website hosting a hypothetical company called Veridian Capital Partners. Something I wanted to work on and play around with. Generated with Claude Code but customized by myself. 
+Focus on M&A Support, Financial Planning and Analysis, and Capital Structure Advisory.
