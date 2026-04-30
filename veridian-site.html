@@ -1,0 +1,2421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Veridian Capital Partners</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink:        #0e0d0b;
+    --cream:      #f4f0e8;
+    --gold:       #b8933a;
+    --gold-lt:    #d4b062;
+    --sage:       #3a5c45;
+    --rust:       #7a3e2a;
+    --slate:      #2c3a4a;
+    --rule:       #c8b99a;
+    --muted:      #8a7d6b;
+    --card-bg:    #faf7f2;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── TOP NAV ─────────────────────────────────────────── */
+  .top-nav {
+    background: var(--ink);
+    border-bottom: 1px solid rgba(184,147,58,.25);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .top-nav-inner {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 0 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 56px;
+  }
+
+  .nav-brand {
+    font-size: .9rem;
+    font-weight: 600;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--cream);
+    cursor: pointer;
+    transition: color .2s;
+    background: none;
+    border: none;
+    font-family: inherit;
+  }
+  .nav-brand:hover { color: var(--gold-lt); }
+  .nav-brand em { color: var(--gold); font-style: normal; }
+
+  .nav-links {
+    display: flex;
+    gap: 4px;
+  }
+
+  .nav-link {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: rgba(244,240,232,.4);
+    padding: 8px 16px;
+    cursor: pointer;
+    background: none;
+    border: 1px solid transparent;
+    transition: color .2s, border-color .2s;
+  }
+  .nav-link:hover { color: var(--gold-lt); }
+  .nav-link.active { color: var(--gold); border-color: rgba(184,147,58,.4); }
+
+  /* ── PAGE VIEWS ──────────────────────────────────────── */
+  .page { display: none; }
+  .page.active { display: block; animation: pageIn .5s ease; }
+
+  @keyframes pageIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ═══════════════════════════════════════════════════════
+     OVERVIEW PAGE
+     ═══════════════════════════════════════════════════════ */
+
+  .hero {
+    position: relative;
+    padding: 0;
+    border-bottom: 1px solid var(--rule);
+    overflow: hidden;
+    background: var(--ink);
+  }
+
+  .hero-texture {
+    position: absolute; inset: 0;
+    background-image:
+      repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(184,147,58,.08) 39px, rgba(184,147,58,.08) 40px),
+      repeating-linear-gradient(90deg, transparent, transparent 79px, rgba(184,147,58,.05) 79px, rgba(184,147,58,.05) 80px);
+  }
+
+  .hero-inner {
+    position: relative;
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 56px 48px 56px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 32px;
+    align-items: end;
+  }
+
+  .hero-inner > div:first-child { align-self: end; }
+
+  /* Center the phoenix mark over the firm name */
+  .hero-logo-wrap { justify-content: flex-start; }
+
+  .firm-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 20px;
+  }
+
+  h1.firm-name {
+    font-size: clamp(2.8rem, 6vw, 4.8rem);
+    font-weight: 300;
+    line-height: 1.05;
+    color: var(--cream);
+    letter-spacing: -.01em;
+  }
+
+  h1.firm-name em {
+    font-style: italic;
+    color: var(--gold-lt);
+  }
+
+  .hero-meta {
+    text-align: right;
+  }
+
+  .hero-meta p {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .15em;
+    text-transform: uppercase;
+    color: rgba(244,240,232,.45);
+    line-height: 2.2;
+  }
+
+  .hero-meta strong {
+    color: var(--gold);
+    font-weight: 400;
+  }
+
+  .gold-rule {
+    display: block;
+    width: 48px;
+    height: 2px;
+    background: linear-gradient(90deg, var(--gold), transparent);
+    margin: 24px 0 0;
+  }
+
+  .overview-main {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 48px 80px;
+  }
+
+  .stats-bar {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border-bottom: 1px solid var(--rule);
+    margin-bottom: 64px;
+  }
+
+  .stat {
+    padding: 28px 0 24px;
+    border-right: 1px solid var(--rule);
+  }
+  .stat:last-child { border-right: none; }
+  .stat:not(:first-child) { padding-left: 24px; }
+
+  .stat-value {
+    font-size: 2rem;
+    font-weight: 300;
+    letter-spacing: -.02em;
+    color: var(--sage);
+    display: block;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .stat-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .section {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 0 48px;
+    padding: 48px 0;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    padding-top: 4px;
+  }
+
+  .section-body p {
+    font-size: 1.2rem;
+    font-weight: 300;
+    line-height: 1.75;
+    color: #2a2520;
+  }
+
+  .section-body p + p { margin-top: 1em; }
+
+  .values-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+  }
+
+  .value-card {
+    background: var(--cream);
+    padding: 28px 24px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .value-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px; height: 100%;
+    background: var(--gold);
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform .4s ease;
+  }
+
+  .value-card:hover::before { transform: scaleY(1); }
+
+  .value-title {
+    font-size: 1.05rem;
+    font-weight: 600;
+    letter-spacing: .02em;
+    color: var(--ink);
+    margin-bottom: 10px;
+  }
+
+  .value-desc {
+    font-family: 'DM Mono', monospace;
+    font-size: 10.5px;
+    line-height: 1.6;
+    color: #6b5f50;
+    font-weight: 300;
+  }
+
+  .value-index {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    color: var(--gold);
+    letter-spacing: .15em;
+    margin-bottom: 14px;
+    display: block;
+  }
+
+  /* CTA block at bottom of overview */
+  .cta-block {
+    margin-top: 48px;
+    padding: 40px 48px;
+    background: var(--ink);
+    color: var(--cream);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 24px;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta-block::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image:
+      repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(184,147,58,.06) 39px, rgba(184,147,58,.06) 40px);
+    pointer-events: none;
+  }
+
+  .cta-text {
+    position: relative;
+  }
+
+  .cta-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 10px;
+  }
+
+  .cta-title {
+    font-size: 1.8rem;
+    font-weight: 300;
+    line-height: 1.2;
+  }
+
+  .cta-title em { color: var(--gold-lt); font-style: italic; }
+
+  .cta-button {
+    position: relative;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: var(--ink);
+    background: var(--gold);
+    border: none;
+    padding: 16px 24px;
+    cursor: pointer;
+    transition: background .2s;
+  }
+  .cta-button:hover { background: var(--gold-lt); }
+  .cta-button::after { content: ' →'; }
+
+  /* ═══════════════════════════════════════════════════════
+     ROLES PAGE
+     ═══════════════════════════════════════════════════════ */
+
+  .roles-header {
+    background: var(--ink);
+    position: relative;
+    overflow: hidden;
+    border-bottom: 2px solid var(--gold);
+  }
+
+  .roles-header-inner {
+    position: relative;
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 52px 48px 44px;
+  }
+
+  .header-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: .25em;
+    text-transform: uppercase;
+    color: rgba(244,240,232,.4);
+    margin-bottom: 14px;
+  }
+
+  .roles-title {
+    font-size: clamp(2.2rem, 5vw, 3.8rem);
+    font-weight: 300;
+    color: var(--cream);
+    line-height: 1.08;
+    letter-spacing: -.01em;
+  }
+
+  .roles-title em { font-style: italic; color: var(--gold-lt); }
+
+  .header-sub {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .18em;
+    color: rgba(244,240,232,.35);
+    margin-top: 16px;
+    text-transform: uppercase;
+  }
+
+  /* Dept sub-nav */
+  .dept-nav {
+    background: var(--ink);
+    border-bottom: 1px solid rgba(184,147,58,.25);
+    position: sticky;
+    top: 56px;
+    z-index: 50;
+  }
+
+  .dept-nav-inner {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 0 48px;
+    display: flex;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .dept-nav-inner::-webkit-scrollbar { display: none; }
+
+  .dept-tab {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: rgba(244,240,232,.4);
+    padding: 16px 20px 14px;
+    cursor: pointer;
+    border: none;
+    border-bottom: 2px solid transparent;
+    white-space: nowrap;
+    transition: color .2s, border-color .2s;
+    background: none;
+  }
+  .dept-tab:hover { color: var(--gold-lt); }
+  .dept-tab.active { color: var(--gold); border-bottom-color: var(--gold); }
+
+  .roles-main {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 56px 48px 80px;
+  }
+
+  .legend {
+    display: flex;
+    gap: 24px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: .15em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .legend-dot {
+    width: 10px; height: 10px;
+    flex-shrink: 0;
+  }
+
+  .legend-dot.entry  { background: var(--sage); }
+  .legend-dot.mid    { background: var(--gold); }
+  .legend-dot.senior { background: var(--rust); }
+  .legend-dot.exec   { background: var(--slate); }
+
+  .dept-section {
+    margin-bottom: 72px;
+  }
+
+  .dept-header {
+    display: flex;
+    align-items: baseline;
+    gap: 20px;
+    margin-bottom: 28px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--rule);
+    cursor: pointer;
+    user-select: none;
+    transition: opacity .2s;
+  }
+
+  .dept-header:hover { opacity: .75; }
+  .dept-header:hover .dept-name { color: var(--gold); }
+
+  .dept-name {
+    font-size: 1.55rem;
+    font-weight: 600;
+    letter-spacing: .01em;
+    color: var(--ink);
+    transition: color .2s;
+    flex: 1;
+  }
+
+  .dept-abbr {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    border: 1px solid var(--gold);
+    padding: 3px 8px;
+    line-height: 1;
+  }
+
+  .dept-chevron {
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    color: var(--gold);
+    transition: transform .35s ease;
+    line-height: 1;
+    margin-left: auto;
+  }
+
+  .dept-section.collapsed .dept-chevron { transform: rotate(-90deg); }
+
+  .role-grid-wrap {
+    display: grid;
+    grid-template-rows: 1fr;
+    transition: grid-template-rows .4s ease, opacity .35s ease;
+    overflow: hidden;
+  }
+
+  .dept-section.collapsed .role-grid-wrap {
+    grid-template-rows: 0fr;
+    opacity: 0;
+  }
+
+  .role-grid-wrap > .role-grid { min-height: 0; }
+
+  .role-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .role-card {
+    background: var(--card-bg);
+    border: 1px solid var(--rule);
+    position: relative;
+    overflow: hidden;
+    transition: border-color .3s, box-shadow .3s;
+  }
+
+  .role-card:hover {
+    border-color: var(--gold);
+    box-shadow: 4px 4px 0 var(--gold);
+  }
+
+  .role-card-accent {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+  }
+
+  .role-card.entry  .role-card-accent { background: var(--sage); }
+  .role-card.mid    .role-card-accent { background: var(--gold); }
+  .role-card.senior .role-card-accent { background: var(--rust); }
+  .role-card.exec   .role-card-accent { background: var(--slate); }
+
+  .role-card-body { padding: 28px 28px 24px; }
+
+  .role-badge {
+    font-family: 'DM Mono', monospace;
+    font-size: 8.5px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    display: inline-block;
+    margin-bottom: 14px;
+    line-height: 1.4;
+  }
+
+  .role-card.entry  .role-badge { background: rgba(58,92,69,.12); color: var(--sage); }
+  .role-card.mid    .role-badge { background: rgba(184,147,58,.12); color: #8a6a20; }
+  .role-card.senior .role-badge { background: rgba(122,62,42,.12); color: var(--rust); }
+  .role-card.exec   .role-badge { background: rgba(44,58,74,.12); color: var(--slate); }
+
+  .role-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    line-height: 1.2;
+    color: var(--ink);
+    margin-bottom: 16px;
+  }
+
+  .role-desc {
+    font-size: 1.0rem;
+    font-weight: 300;
+    line-height: 1.7;
+    color: #3a3028;
+    margin-bottom: 20px;
+  }
+
+  .role-requires-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 8.5px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 10px;
+    display: block;
+  }
+
+  .role-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: .1em;
+    background: rgba(14,13,11,.06);
+    color: #5a4f42;
+    padding: 4px 10px;
+    border-radius: 2px;
+    line-height: 1.4;
+  }
+
+  /* ═══════════════════════════════════════════════════════
+     LEADERSHIP PAGE
+     ═══════════════════════════════════════════════════════ */
+
+  .leadership-header {
+    background: var(--ink);
+    position: relative;
+    overflow: hidden;
+    border-bottom: 2px solid var(--gold);
+  }
+
+  .leadership-header-inner {
+    position: relative;
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 52px 48px 44px;
+  }
+
+  .leadership-main {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 64px 48px 80px;
+  }
+
+  .leadership-intro {
+    max-width: 640px;
+    margin-bottom: 56px;
+    font-size: 1.15rem;
+    font-weight: 300;
+    line-height: 1.75;
+    color: #3a3028;
+  }
+  .leadership-intro em { color: var(--rust); font-style: italic; }
+
+  /* Executive card */
+  .exec-card {
+    margin-bottom: 32px;
+    border: 1px solid var(--rule);
+    background: var(--card-bg);
+    overflow: hidden;
+    transition: box-shadow .3s;
+    display: grid;
+    grid-template-columns: 220px 1fr;
+  }
+
+  .exec-card:hover { box-shadow: 6px 6px 0 var(--gold); }
+
+  /* Portrait panel (monogrammed initials) */
+  .exec-portrait {
+    background: var(--ink);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 32px 16px;
+    border-right: 2px solid var(--gold);
+  }
+
+  .exec-portrait::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image:
+      repeating-linear-gradient(0deg, transparent, transparent 19px, rgba(184,147,58,.08) 19px, rgba(184,147,58,.08) 20px),
+      repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(184,147,58,.05) 39px, rgba(184,147,58,.05) 40px);
+  }
+
+  .exec-monogram {
+    position: relative;
+    width: 110px;
+    height: 110px;
+    border: 1.5px solid var(--gold);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 14px;
+    background: rgba(184,147,58,.04);
+  }
+
+  .exec-monogram::before {
+    content: '';
+    position: absolute;
+    inset: 6px;
+    border: 0.6px solid var(--gold);
+    border-radius: 50%;
+    opacity: 0.4;
+  }
+
+  .exec-monogram-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.6rem;
+    font-weight: 400;
+    color: var(--gold-lt);
+    letter-spacing: .02em;
+    font-style: italic;
+  }
+
+  .exec-portrait-label {
+    position: relative;
+    font-family: 'DM Mono', monospace;
+    font-size: 8.5px;
+    letter-spacing: .25em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  /* Body of card */
+  .exec-body {
+    padding: 32px 36px 32px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .exec-role {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: .25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 8px;
+  }
+
+  .exec-name {
+    font-size: 1.85rem;
+    font-weight: 400;
+    color: var(--ink);
+    line-height: 1.1;
+    letter-spacing: -.005em;
+    margin-bottom: 6px;
+  }
+  .exec-name em { font-style: italic; color: var(--rust); }
+
+  .exec-tagline {
+    font-size: 1.0rem;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--muted);
+    line-height: 1.4;
+    margin-bottom: 18px;
+  }
+
+  .exec-divider {
+    width: 36px;
+    height: 1px;
+    background: var(--gold);
+    margin-bottom: 18px;
+  }
+
+  .exec-bio {
+    font-size: 1.02rem;
+    font-weight: 300;
+    line-height: 1.7;
+    color: #2a2520;
+    margin-bottom: 20px;
+  }
+
+  /* Credentials row */
+  .exec-creds {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    padding-top: 18px;
+    border-top: 1px solid var(--rule);
+    margin-top: auto;
+  }
+
+  .cred {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .cred-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 8.5px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+
+  .cred-value {
+    font-size: .95rem;
+    font-weight: 400;
+    color: var(--ink);
+    line-height: 1.3;
+  }
+
+  .cred-value em { font-style: italic; color: var(--sage); }
+
+
+
+  .cases-header {
+    background: var(--ink);
+    position: relative;
+    overflow: hidden;
+    border-bottom: 2px solid var(--gold);
+  }
+
+  .cases-header-inner {
+    position: relative;
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 52px 48px 44px;
+  }
+
+  .cases-main {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 64px 48px 80px;
+  }
+
+  .cases-intro {
+    max-width: 640px;
+    margin-bottom: 56px;
+    font-size: 1.15rem;
+    font-weight: 300;
+    line-height: 1.75;
+    color: #3a3028;
+  }
+
+  .cases-intro em { color: var(--sage); font-style: italic; }
+
+  /* Case card */
+  .case-card {
+    margin-bottom: 48px;
+    border: 1px solid var(--rule);
+    background: var(--card-bg);
+    overflow: hidden;
+    transition: box-shadow .3s;
+  }
+
+  .case-card:hover { box-shadow: 6px 6px 0 var(--gold); }
+
+  .case-head {
+    display: grid;
+    grid-template-columns: 120px 1fr auto;
+    gap: 32px;
+    align-items: start;
+    padding: 36px 40px 28px;
+    border-bottom: 1px solid var(--rule);
+    background: #fffdf7;
+  }
+
+  .case-number {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .25em;
+    color: var(--gold);
+    text-transform: uppercase;
+    padding-top: 6px;
+  }
+
+  .case-title-block {
+    min-width: 0;
+  }
+
+  .case-client-type {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: .22em;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .case-title {
+    font-size: 1.9rem;
+    font-weight: 400;
+    line-height: 1.2;
+    color: var(--ink);
+    letter-spacing: -.005em;
+    margin-bottom: 10px;
+  }
+
+  .case-title em { font-style: italic; color: var(--rust); }
+
+  .case-tagline {
+    font-size: 1.05rem;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--muted);
+    line-height: 1.4;
+  }
+
+  .case-sector {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--sage);
+    border: 1px solid var(--sage);
+    padding: 4px 10px;
+    line-height: 1;
+    white-space: nowrap;
+    align-self: start;
+    margin-top: 4px;
+  }
+
+  .case-body {
+    padding: 36px 40px 40px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+  }
+
+  .case-block h3 {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 14px;
+    font-weight: 400;
+  }
+
+  .case-block p {
+    font-size: 1.05rem;
+    font-weight: 300;
+    line-height: 1.7;
+    color: #2a2520;
+  }
+
+  .case-block p + p { margin-top: 12px; }
+
+  /* Outcome metrics */
+  .case-metrics {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+    margin-top: 8px;
+  }
+
+  .metric {
+    background: var(--cream);
+    padding: 24px 20px;
+    position: relative;
+  }
+
+  .metric::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px; height: 24px;
+    background: var(--gold);
+  }
+
+  .metric-value {
+    font-size: 1.7rem;
+    font-weight: 300;
+    color: var(--sage);
+    line-height: 1;
+    margin-bottom: 6px;
+    letter-spacing: -.02em;
+  }
+
+  .metric-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  .disclaimer {
+    margin-top: 40px;
+    padding: 20px 24px;
+    border: 1px dashed var(--rule);
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    line-height: 1.7;
+    color: var(--muted);
+    letter-spacing: .05em;
+  }
+
+  .disclaimer strong { color: var(--rust); letter-spacing: .12em; }
+
+
+  /* ═══════════════════════════════════════════════════════
+     AWARDS & RECOGNITION (overview section)
+     ═══════════════════════════════════════════════════════ */
+
+  .awards-section {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 0 48px;
+    padding: 48px 0;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .awards-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .award {
+    border: 1px solid var(--rule);
+    background: var(--card-bg);
+    padding: 22px 24px;
+    display: grid;
+    grid-template-columns: 48px 1fr;
+    gap: 18px;
+    align-items: start;
+    transition: border-color .25s, transform .25s;
+  }
+
+  .award:hover {
+    border-color: var(--gold);
+    transform: translateY(-2px);
+  }
+
+  .award-medal {
+    width: 48px;
+    height: 48px;
+    border: 1.5px solid var(--gold);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem;
+    font-style: italic;
+    color: var(--gold);
+    background: rgba(184,147,58,.05);
+    position: relative;
+    flex-shrink: 0;
+  }
+
+  .award-medal::after {
+    content: '';
+    position: absolute;
+    inset: 4px;
+    border: 0.5px solid var(--gold);
+    border-radius: 50%;
+    opacity: .4;
+  }
+
+  .award-year {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 6px;
+  }
+
+  .award-title {
+    font-size: 1.05rem;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.3;
+    margin-bottom: 4px;
+  }
+
+  .award-org {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: .1em;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+
+
+  /* ═══════════════════════════════════════════════════════
+     INSIGHTS PAGE
+     ═══════════════════════════════════════════════════════ */
+
+  .insights-header {
+    background: var(--ink);
+    position: relative;
+    overflow: hidden;
+    border-bottom: 2px solid var(--gold);
+  }
+
+  .insights-header-inner {
+    position: relative;
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 52px 48px 44px;
+  }
+
+  .insights-main {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 64px 48px 80px;
+  }
+
+  /* Category filter bar */
+  .insights-filters {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 48px;
+    flex-wrap: wrap;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .filter-btn {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: var(--muted);
+    background: none;
+    border: 1px solid var(--rule);
+    padding: 8px 14px;
+    cursor: pointer;
+    transition: color .2s, border-color .2s, background .2s;
+  }
+
+  .filter-btn:hover { color: var(--gold); border-color: var(--gold); }
+  .filter-btn.active {
+    color: var(--cream);
+    background: var(--ink);
+    border-color: var(--ink);
+  }
+
+  /* Featured article */
+  .featured-article {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border: 1px solid var(--rule);
+    background: var(--card-bg);
+    margin-bottom: 48px;
+    overflow: hidden;
+    transition: box-shadow .3s;
+  }
+  .featured-article:hover { box-shadow: 6px 6px 0 var(--gold); }
+
+  .featured-visual {
+    background: var(--ink);
+    position: relative;
+    overflow: hidden;
+    min-height: 320px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .featured-visual::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image:
+      repeating-linear-gradient(0deg, transparent, transparent 29px, rgba(184,147,58,.08) 29px, rgba(184,147,58,.08) 30px),
+      repeating-linear-gradient(90deg, transparent, transparent 59px, rgba(184,147,58,.05) 59px, rgba(184,147,58,.05) 60px);
+  }
+
+  .featured-visual svg {
+    position: relative;
+    width: 60%;
+    height: auto;
+    max-width: 220px;
+  }
+
+  .featured-body {
+    padding: 40px 44px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .featured-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: var(--rust);
+    margin-bottom: 14px;
+  }
+
+  .featured-title {
+    font-size: 1.8rem;
+    font-weight: 400;
+    color: var(--ink);
+    line-height: 1.2;
+    letter-spacing: -.005em;
+    margin-bottom: 14px;
+  }
+  .featured-title em { font-style: italic; color: var(--rust); }
+
+  .featured-excerpt {
+    font-size: 1.05rem;
+    font-weight: 300;
+    line-height: 1.7;
+    color: #3a3028;
+    margin-bottom: 20px;
+  }
+
+  .featured-meta {
+    display: flex;
+    gap: 20px;
+    padding-top: 16px;
+    border-top: 1px solid var(--rule);
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .featured-meta strong { color: var(--ink); font-weight: 400; }
+
+  /* Article grid */
+  .articles-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  .article-card {
+    border: 1px solid var(--rule);
+    background: var(--card-bg);
+    padding: 28px 28px 24px;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    transition: border-color .3s, box-shadow .3s, transform .3s;
+  }
+
+  .article-card:hover {
+    border-color: var(--gold);
+    box-shadow: 4px 4px 0 var(--gold);
+    transform: translateY(-2px);
+  }
+
+  .article-category {
+    font-family: 'DM Mono', monospace;
+    font-size: 8.5px;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    display: inline-block;
+    margin-bottom: 14px;
+    line-height: 1.4;
+    align-self: start;
+  }
+
+  .article-category.market   { background: rgba(184,147,58,.12); color: var(--gold-dk); }
+  .article-category.deal     { background: rgba(58,92,69,.12);   color: var(--sage); }
+  .article-category.research { background: rgba(122,62,42,.12);  color: var(--rust); }
+  .article-category.firm     { background: rgba(14,13,11,.1);    color: var(--ink); }
+
+  .article-title {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.3;
+    margin-bottom: 10px;
+  }
+
+  .article-excerpt {
+    font-size: .98rem;
+    font-weight: 300;
+    line-height: 1.65;
+    color: #3a3028;
+    margin-bottom: 20px;
+    flex: 1;
+  }
+
+  .article-meta {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 14px;
+    border-top: 1px solid var(--rule);
+    font-family: 'DM Mono', monospace;
+    font-size: 8.5px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .article-meta .read-time { color: var(--gold-dk); }
+
+  /* Filter hiding */
+  .article-card.hidden,
+  .featured-article.hidden { display: none; }
+
+
+  /* ── PHOENIX LOGO ─────────────────────────────────────── */
+  .nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .nav-logo {
+    width: 26px;
+    height: 26px;
+    flex-shrink: 0;
+    transition: transform .4s ease;
+  }
+  .nav-brand:hover .nav-logo { transform: rotate(-8deg) scale(1.05); }
+
+  /* Hero phoenix (large, on overview page) */
+  .hero-logo-wrap {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 28px;
+  }
+  .hero-logo {
+    width: 96px;
+    height: 96px;
+    filter: drop-shadow(0 4px 12px rgba(184,147,58,.15));
+  }
+
+  /* Footer phoenix mark */
+  .footer-logo {
+    width: 22px;
+    height: 22px;
+    margin-right: 8px;
+    vertical-align: middle;
+  }
+
+
+  footer {
+    border-top: 1px solid var(--rule);
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 28px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-wordmark {
+    font-size: .8rem;
+    font-weight: 600;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .footer-note {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: .15em;
+    text-transform: uppercase;
+    color: #b0a090;
+  }
+
+  /* ── RESPONSIVE ──────────────────────────────────────── */
+  @media (max-width: 720px) {
+    .top-nav-inner { padding: 0 20px; }
+    .hero-inner { grid-template-columns: 1fr; padding: 40px 20px 32px; }
+    .hero-meta { text-align: left; }
+    .overview-main, .roles-main, footer { padding-left: 20px; padding-right: 20px; }
+    .roles-header-inner { padding: 40px 20px 32px; }
+    .dept-nav-inner { padding: 0 20px; }
+    .stats-bar { grid-template-columns: repeat(2, 1fr); }
+    .stat:nth-child(2) { border-right: none; }
+    .section { grid-template-columns: 1fr; gap: 12px; }
+    .values-grid { grid-template-columns: 1fr; }
+    .role-grid { grid-template-columns: 1fr; }
+    .cta-block { grid-template-columns: 1fr; padding: 28px 24px; }
+    .cases-header-inner, .cases-main { padding-left: 20px; padding-right: 20px; }
+    .case-head { grid-template-columns: 1fr; gap: 12px; padding: 24px; }
+    .case-body { grid-template-columns: 1fr; gap: 28px; padding: 24px; }
+    .case-metrics { grid-template-columns: 1fr; }
+    .leadership-header-inner, .leadership-main { padding-left: 20px; padding-right: 20px; }
+    .exec-card { grid-template-columns: 1fr; }
+    .exec-portrait { border-right: none; border-bottom: 2px solid var(--gold); padding: 28px 16px; }
+    .exec-body { padding: 24px; }
+    .exec-creds { grid-template-columns: 1fr; gap: 12px; }
+    .awards-section { grid-template-columns: 1fr; gap: 12px; }
+    .awards-grid { grid-template-columns: 1fr; }
+    .insights-header-inner, .insights-main { padding-left: 20px; padding-right: 20px; }
+    .featured-article { grid-template-columns: 1fr; }
+    .featured-visual { min-height: 200px; }
+    .featured-body { padding: 28px 24px; }
+    .articles-grid { grid-template-columns: 1fr; }
+    footer { flex-direction: column; gap: 8px; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ════════════ REUSABLE PHOENIX SYMBOL ════════════ -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="phxFlame" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0%" stop-color="#7a3e2a"/>
+      <stop offset="50%" stop-color="#b8933a"/>
+      <stop offset="100%" stop-color="#d4b062"/>
+    </linearGradient>
+    <radialGradient id="phxBody" cx="0.5" cy="0.3" r="0.7">
+      <stop offset="0%" stop-color="#d4b062"/>
+      <stop offset="100%" stop-color="#7a3e2a"/>
+    </radialGradient>
+
+    <symbol id="phoenix" viewBox="0 0 240 240">
+      <!-- Octagonal frame -->
+      <g transform="translate(120, 120)">
+        <path d="M -88 -36 L -36 -88 L 36 -88 L 88 -36 L 88 36 L 36 88 L -36 88 L -88 36 Z" fill="none" stroke="#b8933a" stroke-width="1"/>
+        <path d="M -82 -34 L -34 -82 L 34 -82 L 82 -34 L 82 34 L 34 82 L -34 82 L -82 34 Z" fill="none" stroke="#7a3e2a" stroke-width="0.4" opacity="0.6"/>
+        <g fill="#b8933a">
+          <circle cx="-88" cy="-36" r="1.6"/>
+          <circle cx="88" cy="-36" r="1.6"/>
+          <circle cx="-88" cy="36" r="1.6"/>
+          <circle cx="88" cy="36" r="1.6"/>
+          <circle cx="-36" cy="-88" r="1.6"/>
+          <circle cx="36" cy="-88" r="1.6"/>
+          <circle cx="-36" cy="88" r="1.6"/>
+          <circle cx="36" cy="88" r="1.6"/>
+        </g>
+      </g>
+
+      <!-- Phoenix body -->
+      <g transform="translate(120, 125)">
+        <!-- Bottom flames -->
+        <g fill="url(#phxFlame)">
+          <path d="M -22 50 Q -28 70 -16 78 Q -10 70 -14 56 Z"/>
+          <path d="M -10 52 Q -14 76 -2 80 Q 0 70 -4 58 Z"/>
+          <path d="M 10 52 Q 14 76 2 80 Q 0 70 4 58 Z"/>
+          <path d="M 22 50 Q 28 70 16 78 Q 10 70 14 56 Z"/>
+        </g>
+        <g fill="#d4b062">
+          <path d="M -6 56 Q -8 72 0 76 Q 8 72 6 56 Q 4 64 0 70 Q -4 64 -6 56 Z"/>
+        </g>
+
+        <!-- LEFT WING -->
+        <g fill="#7a3e2a">
+          <path d="M -10 -8 Q -32 -50 -64 -54 Q -56 -50 -50 -42 Q -42 -32 -36 -22 Q -28 -12 -16 -6 Z"/>
+        </g>
+        <g fill="#a55a3e">
+          <path d="M -10 -4 Q -38 -36 -76 -36 Q -68 -32 -60 -28 Q -48 -22 -36 -16 Q -24 -8 -14 -2 Z"/>
+        </g>
+        <g fill="#b8933a">
+          <path d="M -8 0 Q -42 -22 -80 -16 Q -72 -12 -62 -10 Q -48 -8 -34 -6 Q -22 -2 -12 2 Z"/>
+        </g>
+        <g fill="#d4b062">
+          <path d="M -8 4 Q -42 -4 -76 8 Q -68 8 -58 8 Q -44 8 -32 8 Q -20 8 -10 8 Z"/>
+        </g>
+        <g fill="#7a3e2a">
+          <path d="M -64 -54 L -74 -52 L -68 -46 Z"/>
+          <path d="M -76 -36 L -86 -32 L -78 -28 Z"/>
+          <path d="M -80 -16 L -90 -10 L -80 -8 Z"/>
+          <path d="M -76 8 L -86 14 L -76 14 Z"/>
+        </g>
+
+        <!-- RIGHT WING -->
+        <g fill="#7a3e2a">
+          <path d="M 10 -8 Q 32 -50 64 -54 Q 56 -50 50 -42 Q 42 -32 36 -22 Q 28 -12 16 -6 Z"/>
+        </g>
+        <g fill="#a55a3e">
+          <path d="M 10 -4 Q 38 -36 76 -36 Q 68 -32 60 -28 Q 48 -22 36 -16 Q 24 -8 14 -2 Z"/>
+        </g>
+        <g fill="#b8933a">
+          <path d="M 8 0 Q 42 -22 80 -16 Q 72 -12 62 -10 Q 48 -8 34 -6 Q 22 -2 12 2 Z"/>
+        </g>
+        <g fill="#d4b062">
+          <path d="M 8 4 Q 42 -4 76 8 Q 68 8 58 8 Q 44 8 32 8 Q 20 8 10 8 Z"/>
+        </g>
+        <g fill="#7a3e2a">
+          <path d="M 64 -54 L 74 -52 L 68 -46 Z"/>
+          <path d="M 76 -36 L 86 -32 L 78 -28 Z"/>
+          <path d="M 80 -16 L 90 -10 L 80 -8 Z"/>
+          <path d="M 76 8 L 86 14 L 76 14 Z"/>
+        </g>
+
+        <!-- Body -->
+        <ellipse cx="0" cy="8" rx="10" ry="20" fill="url(#phxBody)"/>
+
+        <!-- Neck + head -->
+        <path d="M -6 -10 Q -5 -18 0 -22 Q 5 -18 6 -10 Z" fill="#7a3e2a"/>
+        <ellipse cx="0" cy="-26" rx="7" ry="8" fill="#7a3e2a"/>
+        <ellipse cx="0" cy="-26" rx="6" ry="7" fill="#a55a3e"/>
+
+        <!-- Beak -->
+        <path d="M 0 -32 L 4 -38 L 6 -34 L 2 -30 Z" fill="#d4b062" stroke="#7a3e2a" stroke-width="0.4"/>
+
+        <!-- Eye -->
+        <circle cx="2" cy="-27" r="1.8" fill="#0e0d0b"/>
+        <circle cx="2.5" cy="-27.5" r="0.6" fill="#d4b062"/>
+
+        <!-- Crown plumes -->
+        <g fill="url(#phxFlame)">
+          <path d="M -4 -32 Q -8 -46 -10 -56 Q -6 -50 -4 -42 Z"/>
+          <path d="M 0 -34 Q -2 -50 0 -62 Q 2 -50 0 -34 Z"/>
+          <path d="M 4 -32 Q 8 -46 10 -56 Q 6 -50 4 -42 Z"/>
+        </g>
+
+        <!-- Tail feathers -->
+        <g fill="#7a3e2a">
+          <path d="M -10 24 Q -20 50 -12 72 Q -8 60 -6 40 Z"/>
+          <path d="M 10 24 Q 20 50 12 72 Q 8 60 6 40 Z"/>
+        </g>
+        <g fill="#b8933a">
+          <path d="M -6 24 Q -10 52 -4 76 Q -2 60 -2 40 Z"/>
+          <path d="M 6 24 Q 10 52 4 76 Q 2 60 2 40 Z"/>
+        </g>
+        <g fill="#d4b062">
+          <path d="M -2 26 Q -2 56 0 80 Q 2 56 2 26 Z"/>
+        </g>
+        <g fill="#d4b062">
+          <circle cx="-12" cy="48" r="1.2"/>
+          <circle cx="12" cy="48" r="1.2"/>
+          <circle cx="0" cy="56" r="1.2"/>
+        </g>
+        <g fill="#7a3e2a">
+          <circle cx="-12" cy="48" r="0.5"/>
+          <circle cx="12" cy="48" r="0.5"/>
+          <circle cx="0" cy="56" r="0.5"/>
+        </g>
+      </g>
+    </symbol>
+  </defs>
+</svg>
+
+<!-- ════════════ TOP NAV ════════════ -->
+<nav class="top-nav">
+  <div class="top-nav-inner">
+    <button class="nav-brand" onclick="showPage('overview')">
+      <svg class="nav-logo" aria-hidden="true"><use href="#phoenix"/></svg>
+      <span>Veridian <em>Capital</em></span>
+    </button>
+    <div class="nav-links">
+      <button class="nav-link active" data-page="overview" onclick="showPage('overview')">Overview</button>
+      <button class="nav-link" data-page="leadership" onclick="showPage('leadership')">Leadership</button>
+      <button class="nav-link" data-page="roles" onclick="showPage('roles')">Roles</button>
+      <button class="nav-link" data-page="cases" onclick="showPage('cases')">Case Studies</button>
+      <button class="nav-link" data-page="insights" onclick="showPage('insights')">Insights</button>
+    </div>
+  </div>
+</nav>
+
+<!-- ════════════ OVERVIEW PAGE ════════════ -->
+<div class="page active" id="page-overview">
+
+  <header class="hero">
+    <div class="hero-texture"></div>
+    <div class="hero-inner">
+      <div>
+        <div class="hero-logo-wrap">
+          <svg class="hero-logo" aria-hidden="true"><use href="#phoenix"/></svg>
+        </div>
+        <p class="firm-eyebrow">Corporate Finance &amp; Advisory · Est. 2009</p>
+        <h1 class="firm-name">Veridian <em>Capital</em><br>Partners</h1>
+        <span class="gold-rule"></span>
+      </div>
+      <div class="hero-meta">
+        <p>HQ <strong>Dallas, Texas</strong></p>
+        <p>Industry <strong>Finance</strong></p>
+        <p>Employees <strong>~320</strong></p>
+        <p>Revenue <strong>$85M – $110M</strong></p>
+      </div>
+    </div>
+  </header>
+
+  <main class="overview-main">
+
+    <div class="stats-bar">
+      <div class="stat">
+        <span class="stat-value" data-target="2009" data-format="year">2009</span>
+        <span class="stat-label">Founded</span>
+      </div>
+      <div class="stat">
+        <span class="stat-value" data-target="320" data-prefix="~">~320</span>
+        <span class="stat-label">Employees</span>
+      </div>
+      <div class="stat">
+        <span class="stat-value" data-target="110" data-prefix="$" data-suffix="M">$110M</span>
+        <span class="stat-label">Peak Revenue</span>
+      </div>
+      <div class="stat">
+        <span class="stat-value" data-target="15" data-suffix="+">15+</span>
+        <span class="stat-label">Years Active</span>
+      </div>
+    </div>
+
+    <div class="section">
+      <span class="section-label">About the Firm</span>
+      <div class="section-body">
+        <p>Veridian Capital Partners is a mid-market corporate finance firm specializing in capital structure advisory, financial planning, and M&amp;A transaction support for industrial and energy sector clients across the Southern United States.</p>
+        <p>Founded in the aftermath of the 2008 financial crisis, the firm was built on the belief that companies deserve transparent, data-driven financial guidance — not just deal volume. Veridian serves private companies, family-owned businesses, and publicly traded mid-caps looking to optimize their balance sheets, raise debt capital, or pursue strategic acquisitions.</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <span class="section-label">Core Values</span>
+      <div class="section-body">
+        <div class="values-grid">
+          <div class="value-card">
+            <span class="value-index">01</span>
+            <div class="value-title">Integrity First</div>
+            <div class="value-desc">Advice is never influenced by fee structures. Our counsel reflects your interests, not our incentives.</div>
+          </div>
+          <div class="value-card">
+            <span class="value-index">02</span>
+            <div class="value-title">Analytical Rigor</div>
+            <div class="value-desc">Every recommendation is model-backed. We don't guess — we stress-test, scenario-plan, and validate.</div>
+          </div>
+          <div class="value-card">
+            <span class="value-index">03</span>
+            <div class="value-title">Client Longevity</div>
+            <div class="value-desc">Relationships over transactions. We measure success in decades, not deal closings.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <span class="section-label">Focus Areas</span>
+      <div class="section-body">
+        <p>Capital structure advisory · Financial planning &amp; analysis · M&amp;A transaction support · Debt capital raising · Balance sheet optimization · Strategic acquisition counsel</p>
+        <p>Sector coverage spans <em>industrial</em> and <em>energy</em> clients, with a particular depth in Southern U.S. markets where Veridian has cultivated enduring relationships with lenders, operators, and family-owned enterprises.</p>
+      </div>
+    </div>
+
+    <div class="awards-section">
+      <span class="section-label">Awards &amp; Recognition</span>
+      <div class="awards-grid">
+        <div class="award">
+          <div class="award-medal">I</div>
+          <div>
+            <div class="award-year">2024</div>
+            <div class="award-title">Mid-Market M&amp;A Advisor of the Year — Southern U.S.</div>
+            <div class="award-org">M&amp;A Advisor Awards</div>
+          </div>
+        </div>
+        <div class="award">
+          <div class="award-medal">II</div>
+          <div>
+            <div class="award-year">2024</div>
+            <div class="award-title">Energy Sector Deal of the Year ($250M–$500M)</div>
+            <div class="award-org">Private Equity Wire</div>
+          </div>
+        </div>
+        <div class="award">
+          <div class="award-medal">III</div>
+          <div>
+            <div class="award-year">2023</div>
+            <div class="award-title">Best Boutique Corporate Finance Firm — Texas</div>
+            <div class="award-org">Global Finance Magazine</div>
+          </div>
+        </div>
+        <div class="award">
+          <div class="award-medal">IV</div>
+          <div>
+            <div class="award-year">2023</div>
+            <div class="award-title">Restructuring Advisor of the Year — Industrials</div>
+            <div class="award-org">Turnaround Management Assoc.</div>
+          </div>
+        </div>
+        <div class="award">
+          <div class="award-medal">V</div>
+          <div>
+            <div class="award-year">2022</div>
+            <div class="award-title">Top 50 Fastest-Growing Financial Services Firms</div>
+            <div class="award-org">Dallas Business Journal</div>
+          </div>
+        </div>
+        <div class="award">
+          <div class="award-medal">VI</div>
+          <div>
+            <div class="award-year">2021</div>
+            <div class="award-title">Client Service Excellence in Middle-Market Advisory</div>
+            <div class="award-org">Acquisition International</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cta-block">
+      <div class="cta-text">
+        <p class="cta-eyebrow">Selected Engagements</p>
+        <p class="cta-title">See how we've partnered with <em>mid-market clients</em></p>
+      </div>
+      <button class="cta-button" onclick="showPage('cases')">View Case Studies</button>
+    </div>
+
+  </main>
+</div>
+
+<!-- ════════════ LEADERSHIP PAGE ════════════ -->
+<div class="page" id="page-leadership">
+
+  <header class="leadership-header">
+    <div class="hero-texture"></div>
+    <div class="leadership-header-inner">
+      <p class="header-eyebrow">The Partners</p>
+      <h1 class="roles-title">Executive <em>Leadership</em></h1>
+      <p class="header-sub">Three principals · Founded 2009 · Dallas, Texas</p>
+    </div>
+  </header>
+
+  <main class="leadership-main">
+
+    <p class="leadership-intro">
+      Veridian's executive team brings together more than <em>seventy years</em> of combined experience across investment banking, energy capital markets, and enterprise technology. Each principal joined the firm with a track record built outside Wall Street — a deliberate choice that shapes how we counsel clients today.
+    </p>
+
+    <!-- CEO -->
+    <div class="exec-card">
+      <div class="exec-portrait">
+        <div class="exec-monogram">
+          <span class="exec-monogram-text">ES</span>
+        </div>
+        <span class="exec-portrait-label">Chief Executive</span>
+      </div>
+      <div class="exec-body">
+        <p class="exec-role">Co-Founder · Chief Executive Officer</p>
+        <h2 class="exec-name">Ethan <em>Stone</em></h2>
+        <p class="exec-tagline">"Independent advice is the only kind worth giving."</p>
+        <div class="exec-divider"></div>
+        <p class="exec-bio">Ethan co-founded Veridian in 2009 after fifteen years in leveraged finance at a major bulge-bracket bank, where he led debt capital markets coverage for the energy and industrials sectors. His vision for the firm — transparent, fee-aligned advisory free of conflicts — was shaped directly by what he saw fail during the 2008 crisis. Today he leads firm strategy, sits on the investment committee for every major engagement, and personally manages relationships with the firm's largest family-office clients.</p>
+        <div class="exec-creds">
+          <div class="cred">
+            <span class="cred-label">Education</span>
+            <span class="cred-value">MBA, <em>Wharton</em><br>BA, Rice University</span>
+          </div>
+          <div class="cred">
+            <span class="cred-label">Previously</span>
+            <span class="cred-value">MD, Energy DCM<br>Goldman Sachs</span>
+          </div>
+          <div class="cred">
+            <span class="cred-label">Boards</span>
+            <span class="cred-value">Federal Reserve Bank<br>of Dallas — Adv. Council</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CFO -->
+    <div class="exec-card">
+      <div class="exec-portrait">
+        <div class="exec-monogram">
+          <span class="exec-monogram-text">RO</span>
+        </div>
+        <span class="exec-portrait-label">Chief Financial</span>
+      </div>
+      <div class="exec-body">
+        <p class="exec-role">Chief Financial Officer</p>
+        <h2 class="exec-name">Raymond <em>Okafor</em></h2>
+        <p class="exec-tagline">"Numbers don't have opinions, but they do tell stories."</p>
+        <div class="exec-divider"></div>
+        <p class="exec-bio">Raymond joined Veridian in 2014 after a decade at a Big Four accounting firm, where he led the energy audit practice for the Gulf region. He oversees the firm's internal finance functions — FP&amp;A, Treasury, Controllership — as well as the financial reporting standards applied to client engagements. Raymond is known internally for the rigor of his quarterly reviews and externally for translating complex capital structures into language that boards and family stakeholders can act on.</p>
+        <div class="exec-creds">
+          <div class="cred">
+            <span class="cred-label">Credentials</span>
+            <span class="cred-value"><em>CPA</em>, Texas<br><em>CFA</em> Charterholder</span>
+          </div>
+          <div class="cred">
+            <span class="cred-label">Previously</span>
+            <span class="cred-value">Partner, Energy Audit<br>Deloitte (Houston)</span>
+          </div>
+          <div class="cred">
+            <span class="cred-label">Speaks</span>
+            <span class="cred-value">English · Igbo<br>French (working)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTO -->
+    <div class="exec-card">
+      <div class="exec-portrait">
+        <div class="exec-monogram">
+          <span class="exec-monogram-text">PS</span>
+        </div>
+        <span class="exec-portrait-label">Chief Technology</span>
+      </div>
+      <div class="exec-body">
+        <p class="exec-role">Chief Technology Officer</p>
+        <h2 class="exec-name">Priya <em>Sundaresan</em></h2>
+        <p class="exec-tagline">"Better models lead to better counsel."</p>
+        <div class="exec-divider"></div>
+        <p class="exec-bio">Priya joined Veridian in 2019 to build the firm's proprietary modeling and analytics platform — a unified environment where every analyst can run scenario analyses, stress tests, and Monte Carlo simulations against live deal data. Before Veridian, she spent twelve years building risk and pricing systems for a major commodities trading desk in Singapore and Houston. Under her leadership, Veridian has moved from spreadsheet-bound workflows to a cloud-native analytics stack that meaningfully shortens engagement timelines without sacrificing the firm's signature analytical depth.</p>
+        <div class="exec-creds">
+          <div class="cred">
+            <span class="cred-label">Education</span>
+            <span class="cred-value">MS Computer Science<br><em>Stanford</em></span>
+          </div>
+          <div class="cred">
+            <span class="cred-label">Previously</span>
+            <span class="cred-value">Head of Quant Eng.<br>Trafigura (Singapore)</span>
+          </div>
+          <div class="cred">
+            <span class="cred-label">Patents</span>
+            <span class="cred-value">3 patents in commodity<br>derivatives modeling</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- ════════════ ROLES PAGE ════════════ -->
+<div class="page" id="page-roles">
+
+  <header class="roles-header">
+    <div class="hero-texture"></div>
+    <div class="roles-header-inner">
+      <p class="header-eyebrow">Organizational Structure</p>
+      <h1 class="roles-title">Roles &amp; <em>Responsibilities</em></h1>
+      <p class="header-sub">Four departments · Eight positions · Entry through Executive</p>
+    </div>
+  </header>
+
+  <nav class="dept-nav">
+    <div class="dept-nav-inner">
+      <button class="dept-tab active" onclick="scrollToDept('fpa', this)">FP&amp;A</button>
+      <button class="dept-tab" onclick="scrollToDept('treasury', this)">Treasury &amp; Capital</button>
+      <button class="dept-tab" onclick="scrollToDept('mna', this)">Corporate Dev &amp; M&amp;A</button>
+      <button class="dept-tab" onclick="scrollToDept('control', this)">Controllership &amp; Risk</button>
+    </div>
+  </nav>
+
+  <main class="roles-main">
+
+    <div class="legend">
+      <div class="legend-item"><div class="legend-dot entry"></div>Entry-Level</div>
+      <div class="legend-item"><div class="legend-dot mid"></div>Mid-Level</div>
+      <div class="legend-item"><div class="legend-dot senior"></div>Senior</div>
+      <div class="legend-item"><div class="legend-dot exec"></div>Executive</div>
+    </div>
+
+    <!-- FP&A -->
+    <div class="dept-section" id="fpa">
+      <div class="dept-header" onclick="toggleDept(this)">
+        <span class="dept-name">Financial Planning &amp; Analysis</span>
+        <span class="dept-abbr">FP&amp;A</span>
+        <span class="dept-chevron">▾</span>
+      </div>
+      <div class="role-grid-wrap"><div class="role-grid">
+
+        <div class="role-card entry">
+          <div class="role-card-accent"></div>
+          <div class="role-card-body">
+            <span class="role-badge">Entry-Level</span>
+            <div class="role-title">Financial Analyst</div>
+            <p class="role-desc">Builds and maintains financial models, prepares monthly variance reports, and tracks KPIs for both internal operations and client engagements. Supports senior analysts in budget forecasting and P&amp;L analysis.</p>
+            <span class="role-requires-label">Requirements</span>
+            <div class="role-tags">
+              <span class="tag">Excel · Pivot Tables · DCF</span>
+              <span class="tag">GAAP</span>
+              <span class="tag">SAP or Oracle</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="role-card mid">
+          <div class="role-card-accent"></div>
+          <div class="role-card-body">
+            <span class="role-badge">Mid-Level</span>
+            <div class="role-title">Senior FP&amp;A Analyst</div>
+            <p class="role-desc">Leads quarterly forecasting cycles and owns the firm's internal budget consolidation process. Presents financial performance narratives to the CFO and department heads, identifying risks and opportunities.</p>
+            <span class="role-requires-label">Requirements</span>
+            <div class="role-tags">
+              <span class="tag">4–6 Yrs FP&amp;A</span>
+              <span class="tag">Advanced Excel</span>
+              <span class="tag">Power BI</span>
+              <span class="tag">Strong Written Communication</span>
+            </div>
+          </div>
+        </div>
+
+      </div></div>
+    </div>
+
+    <!-- TREASURY -->
+    <div class="dept-section" id="treasury">
+      <div class="dept-header" onclick="toggleDept(this)">
+        <span class="dept-name">Treasury &amp; Capital Markets</span>
+        <span class="dept-abbr">Treasury</span>
+        <span class="dept-chevron">▾</span>
+      </div>
+      <div class="role-grid-wrap"><div class="role-grid">
+
+        <div class="role-card entry">
+          <div class="role-card-accent"></div>
+          <div class="role-card-body">
+            <span class="role-badge">Entry-Level</span>
+            <div class="role-title">Treasury Analyst</div>
+            <p class="role-desc">Monitors daily cash positions, manages short-term liquidity needs, and supports debt covenant compliance tracking for client portfolios. Assists in preparing borrowing base certificates and lender reporting packages.</p>
+            <span class="role-requires-label">Requirements</span>
+            <div class="role-tags">
+              <span class="tag">Cash Flow Management</span>
+              <span class="tag">Basic Credit Analysis</span>
+              <span class="tag">Excel Modeling</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="role-card senior">
+          <div class="role-card-accent"></div>
+          <div class="role-card-body">
+            <span class="role-badge">Senior</span>
+            <div class="role-title">Director of Treasury</div>
+            <p class="role-desc">Oversees the firm's capital structure strategy, manages banking relationships, and leads the execution of debt financing transactions for clients. Evaluates hedging strategies and interest rate exposure.</p>
+            <span class="role-requires-label">Requirements</span>
+            <div class="role-tags">
+              <span class="tag">10+ Yrs Treasury / Corp Banking</span>
+              <span class="tag">CFA or CTP Preferred</span>
+              <span class="tag">Bloomberg Terminal</span>
+            </div>
+          </div>
+        </div>
+
+      </div></div>
+    </div>
+
+    <!-- M&A -->
+    <div class="dept-section" id="mna">
+      <div class="dept-header" onclick="toggleDept(this)">
+        <span class="dept-name">Corporate Development &amp; M&amp;A</span>
+        <span class="dept-abbr">Corp Dev</span>
+        <span class="dept-chevron">▾</span>
+      </div>
+      <div class="role-grid-wrap"><div class="role-grid">
+
+        <div class="role-card entry">
+          <div class="role-card-accent"></div>
+          <div class="role-card-body">
+            <span class="role-badge">Entry-Level</span>
+            <div class="role-title">M&amp;A Analyst</div>
+            <p class="role-desc">Conducts industry research, builds merger models, and prepares pitch materials for acquisition targets. Performs comparable company analysis and precedent transaction analysis for live deals.</p>
+            <span class="role-requires-label">Requirements</span>
+            <div class="role-tags">
+              <span class="tag">Financial Modeling</span>
+              <span class="tag">Excel Proficiency</span>
+              <span class="tag">Intralinks / Data Rooms</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="role-card senior">
+          <div class="role-card-accent"></div>
+          <div class="role-card-body">
+            <span class="role-badge">Senior</span>
+            <div class="role-title">VP, Corporate Development</div>
+            <p class="role-desc">Manages the full lifecycle of M&amp;A transactions from target identification through close. Leads due diligence coordination, negotiates term sheets, and works directly with client CFOs and legal counsel.</p>
+            <span class="role-requires-label">Requirements</span>
+            <div class="role-tags">
+              <span class="tag">8+ Yrs IB / Corp Dev</span>
+              <span class="tag">Deal Execution</span>
+              <span class="tag">Term Sheet Negotiation</span>
+            </div>
+          </div>
+        </div>
+
+      </div></div>
+    </div>
+
+    <!-- CONTROLLERSHIP -->
+    <div class="dept-section" id="control">
+      <div class="dept-header" onclick="toggleDept(this)">
+        <span class="dept-name">Controllership &amp; Risk</span>
+        <span class="dept-abbr">Control</span>
+        <span class="dept-chevron">▾</span>
+      </div>
+      <div class="role-grid-wrap"><div class="role-grid">
+
+        <div class="role-card entry">
+          <div class="role-card-accent"></div>
+          <div class="role-card-body">
+            <span class="role-badge">Entry-Level</span>
+            <div class="role-title">Staff Accountant / Junior Controller</div>
+            <p class="role-desc">Maintains the general ledger, reconciles balance sheet accounts, and prepares financial statements in accordance with GAAP. Supports external audit processes and assists with tax compliance documentation.</p>
+            <span class="role-requires-label">Requirements</span>
+            <div class="role-tags">
+              <span class="tag">Accounting or Finance Degree</span>
+              <span class="tag">CPA Track Preferred</span>
+              <span class="tag">Excel</span>
+              <span class="tag">GAAP</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="role-card exec">
+          <div class="role-card-accent"></div>
+          <div class="role-card-body">
+            <span class="role-badge">Executive</span>
+            <div class="role-title">Chief Financial Officer</div>
+            <p class="role-desc">Serves as the firm's top financial decision-maker, overseeing FP&amp;A, Treasury, Controllership, and client-facing advisory services. Reports directly to the CEO and Managing Partners. Communicates financial performance to the board and key stakeholders.</p>
+            <span class="role-requires-label">Requirements</span>
+            <div class="role-tags">
+              <span class="tag">15+ Yrs Finance Leadership</span>
+              <span class="tag">MBA or CFA Strongly Preferred</span>
+              <span class="tag">Capital Markets</span>
+              <span class="tag">Financial Reporting</span>
+            </div>
+          </div>
+        </div>
+
+      </div></div>
+    </div>
+
+  </main>
+</div>
+
+<!-- ════════════ CASE STUDIES PAGE ════════════ -->
+<div class="page" id="page-cases">
+
+  <header class="cases-header">
+    <div class="hero-texture"></div>
+    <div class="cases-header-inner">
+      <p class="header-eyebrow">Selected Engagements</p>
+      <h1 class="roles-title">Case <em>Studies</em></h1>
+      <p class="header-sub">Three representative client stories · Industrial · Energy · Services</p>
+    </div>
+  </header>
+
+  <main class="cases-main">
+
+    <p class="cases-intro">
+      Every engagement begins with the same question: <em>what does this company actually need?</em> Below are three representative stories of how Veridian has partnered with mid-market clients across the Southern U.S. — optimizing balance sheets, navigating transitions, and executing strategic transactions.
+    </p>
+
+    <!-- CASE 01 -->
+    <div class="case-card">
+      <div class="case-head">
+        <span class="case-number">Case 01</span>
+        <div class="case-title-block">
+          <p class="case-client-type">Family-Owned Industrial Manufacturer · Houston, TX</p>
+          <h2 class="case-title">Hartwell Steel &amp; <em>Fabrication</em></h2>
+          <p class="case-tagline">A third-generation fabricator refinances legacy debt and unlocks growth capital</p>
+        </div>
+        <span class="case-sector">Industrial</span>
+      </div>
+      <div class="case-body">
+        <div class="case-block">
+          <h3>The Challenge</h3>
+          <p>Hartwell, a 60-year-old family-owned steel fabricator serving petrochemical and infrastructure clients, was servicing $42M of legacy debt at punitive post-COVID interest rates. The founding family had also been approached by a private equity suitor offering a partial liquidity event — but the term sheet was structured to strip operational control.</p>
+          <p>The CEO wanted to preserve family ownership while freeing up capital to expand into offshore wind component fabrication.</p>
+        </div>
+        <div class="case-block">
+          <h3>Veridian's Approach</h3>
+          <p>Rather than defaulting to a sale, Veridian's Treasury and FP&amp;A teams modeled three alternative capital structures. The recommended path: a senior secured refinancing with a regional bank syndicate, paired with a $15M mezzanine tranche from a long-hold credit fund.</p>
+          <p>The structure lowered blended cost of capital by ~240 bps and preserved 100% family equity, while providing the growth capital Hartwell needed.</p>
+        </div>
+        <div class="case-metrics">
+          <div class="metric">
+            <div class="metric-value">$57M</div>
+            <div class="metric-label">Total Capital Raised</div>
+          </div>
+          <div class="metric">
+            <div class="metric-value">−240 bps</div>
+            <div class="metric-label">Blended Rate Reduction</div>
+          </div>
+          <div class="metric">
+            <div class="metric-value">100%</div>
+            <div class="metric-label">Family Ownership Retained</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CASE 02 -->
+    <div class="case-card">
+      <div class="case-head">
+        <span class="case-number">Case 02</span>
+        <div class="case-title-block">
+          <p class="case-client-type">Publicly Traded Mid-Cap · Oklahoma City, OK</p>
+          <h2 class="case-title">Meridian Basin <em>Resources</em></h2>
+          <p class="case-tagline">A permian basin operator pivots its portfolio through strategic divestiture</p>
+        </div>
+        <span class="case-sector">Energy</span>
+      </div>
+      <div class="case-body">
+        <div class="case-block">
+          <h3>The Challenge</h3>
+          <p>Meridian Basin, a $480M market cap E&amp;P company, had accumulated a portfolio of non-core gas assets in the Anadarko Basin that were dragging on consolidated returns. Activist shareholders were publicly pressuring the board to divest, but prior attempts had stalled due to valuation gaps with potential buyers.</p>
+          <p>The board needed a partner who could run a disciplined process without leaking information into an already-volatile sector.</p>
+        </div>
+        <div class="case-block">
+          <h3>Veridian's Approach</h3>
+          <p>The M&amp;A team ran a two-phase process: a targeted outreach to five strategic buyers with geographic overlap, followed by a limited auction for financial sponsors. In parallel, Veridian built an asset-level DCF that reframed the reserves under updated commodity curves — supporting a higher defensible valuation.</p>
+          <p>The winning bid came in 18% above initial management expectations, and the transaction closed on a compressed 4-month timeline.</p>
+        </div>
+        <div class="case-metrics">
+          <div class="metric">
+            <div class="metric-value">$312M</div>
+            <div class="metric-label">Divestiture Value</div>
+          </div>
+          <div class="metric">
+            <div class="metric-value">+18%</div>
+            <div class="metric-label">Premium to Initial Estimate</div>
+          </div>
+          <div class="metric">
+            <div class="metric-value">4 mo</div>
+            <div class="metric-label">Sign-to-Close</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CASE 03 -->
+    <div class="case-card">
+      <div class="case-head">
+        <span class="case-number">Case 03</span>
+        <div class="case-title-block">
+          <p class="case-client-type">Private Company · Birmingham, AL</p>
+          <h2 class="case-title">Southern Logistics <em>Group</em></h2>
+          <p class="case-tagline">A regional trucking firm executes a strategic acquisition to enter cold-chain</p>
+        </div>
+        <span class="case-sector">Services</span>
+      </div>
+      <div class="case-body">
+        <div class="case-block">
+          <h3>The Challenge</h3>
+          <p>Southern Logistics, a privately held $95M revenue freight carrier, wanted to acquire a specialty cold-chain operator to diversify beyond commoditized dry van routes. The target — a regional refrigerated carrier with $40M in revenue — had attractive margins but significant customer concentration risk.</p>
+          <p>Management needed rigorous diligence plus acquisition financing that wouldn't over-lever the combined entity.</p>
+        </div>
+        <div class="case-block">
+          <h3>Veridian's Approach</h3>
+          <p>Veridian's Corporate Development team coordinated financial, operational, and customer diligence over a 10-week period, identifying a concentrated customer relationship that justified a $4M earnout structure rather than pure cash consideration.</p>
+          <p>The Treasury team simultaneously sourced an ABL facility plus a seller note, financing the transaction without requiring new equity dilution. Post-close integration tracked to Veridian's synergy model within 90 days.</p>
+        </div>
+        <div class="case-metrics">
+          <div class="metric">
+            <div class="metric-value">$48M</div>
+            <div class="metric-label">Transaction Value</div>
+          </div>
+          <div class="metric">
+            <div class="metric-value">0%</div>
+            <div class="metric-label">Equity Dilution</div>
+          </div>
+          <div class="metric">
+            <div class="metric-value">90 days</div>
+            <div class="metric-label">To Synergy Capture</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="disclaimer">
+      <strong>Note:</strong> The engagements above are hypothetical illustrations created for demonstration purposes. Client names, transaction values, and outcomes are fictitious and do not represent actual Veridian Capital Partners engagements.
+    </div>
+
+  </main>
+</div>
+
+<!-- ════════════ INSIGHTS PAGE ════════════ -->
+<div class="page" id="page-insights">
+
+  <header class="insights-header">
+    <div class="hero-texture"></div>
+    <div class="insights-header-inner">
+      <p class="header-eyebrow">Perspectives · Research · Commentary</p>
+      <h1 class="roles-title">News &amp; <em>Insights</em></h1>
+      <p class="header-sub">Market outlooks · Deal announcements · Sector research</p>
+    </div>
+  </header>
+
+  <main class="insights-main">
+
+    <!-- Category filter bar -->
+    <div class="insights-filters">
+      <button class="filter-btn active" data-filter="all">All Posts</button>
+      <button class="filter-btn" data-filter="market">Market Commentary</button>
+      <button class="filter-btn" data-filter="deal">Deal Announcements</button>
+      <button class="filter-btn" data-filter="research">Sector Research</button>
+      <button class="filter-btn" data-filter="firm">Firm News</button>
+    </div>
+
+    <!-- Featured article -->
+    <div class="featured-article" data-category="market">
+      <div class="featured-visual">
+        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+          <!-- Stylized chart motif -->
+          <g transform="translate(100, 100)">
+            <circle cx="0" cy="0" r="80" fill="none" stroke="#b8933a" stroke-width="1" opacity="0.6"/>
+            <circle cx="0" cy="0" r="64" fill="none" stroke="#b8933a" stroke-width="0.5" opacity="0.4" stroke-dasharray="2 3"/>
+            <!-- Rising bar chart -->
+            <rect x="-48" y="10" width="12" height="22" fill="#3a5c45"/>
+            <rect x="-28" y="-2" width="12" height="34" fill="#5a7c63"/>
+            <rect x="-8" y="-16" width="12" height="48" fill="#b8933a"/>
+            <rect x="12" y="-28" width="12" height="60" fill="#d4b062"/>
+            <rect x="32" y="-42" width="12" height="74" fill="#7a3e2a"/>
+            <!-- Trend line -->
+            <path d="M -42 16 L -22 4 L -2 -10 L 18 -22 L 38 -36" fill="none" stroke="#d4b062" stroke-width="1.5" stroke-linecap="round"/>
+            <circle cx="-42" cy="16" r="2" fill="#d4b062"/>
+            <circle cx="-22" cy="4" r="2" fill="#d4b062"/>
+            <circle cx="-2" cy="-10" r="2" fill="#d4b062"/>
+            <circle cx="18" cy="-22" r="2" fill="#d4b062"/>
+            <circle cx="38" cy="-36" r="3" fill="#d4b062" stroke="#0e0d0b" stroke-width="1"/>
+            <!-- Axis -->
+            <line x1="-54" y1="38" x2="48" y2="38" stroke="#b8933a" stroke-width="0.5"/>
+          </g>
+        </svg>
+      </div>
+      <div class="featured-body">
+        <div class="featured-tag">★ Featured · Market Commentary</div>
+        <h2 class="featured-title">The Quiet Return of <em>Mid-Market</em> Debt Financing</h2>
+        <p class="featured-excerpt">After eighteen months of elevated rates and tightened credit standards, mid-market borrowers are finally seeing meaningful relief. Raymond Okafor breaks down what changed, which structures are gaining traction, and why family-owned industrials stand to benefit most.</p>
+        <div class="featured-meta">
+          <span>By <strong>Raymond Okafor</strong></span>
+          <span>April 2026</span>
+          <span class="read-time">12 min read</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Article grid -->
+    <div class="articles-grid">
+
+      <div class="article-card" data-category="research">
+        <span class="article-category research">Sector Research</span>
+        <h3 class="article-title">Permian Basin Divestitures: A Buyer's Window</h3>
+        <p class="article-excerpt">Rising production costs and ESG portfolio rebalancing have created a rare opening for strategic acquirers with operational patience. We examine deal velocity, valuation multiples, and what separates winning bids.</p>
+        <div class="article-meta">
+          <span>March 2026</span>
+          <span class="read-time">9 min</span>
+        </div>
+      </div>
+
+      <div class="article-card" data-category="deal">
+        <span class="article-category deal">Deal Announcement</span>
+        <h3 class="article-title">Veridian Advises on $312M Divestiture in Anadarko Basin</h3>
+        <p class="article-excerpt">Meridian Basin Resources completed the sale of its non-core gas portfolio to a strategic acquirer following a disciplined two-phase auction process led by Veridian's Corporate Development team.</p>
+        <div class="article-meta">
+          <span>February 2026</span>
+          <span class="read-time">4 min</span>
+        </div>
+      </div>
+
+      <div class="article-card" data-category="market">
+        <span class="article-category market">Market Commentary</span>
+        <h3 class="article-title">Why Family-Owned Businesses Are Rethinking PE</h3>
+        <p class="article-excerpt">Traditional private equity structures often misalign with multi-generational ownership goals. Ethan Stone on the rise of minority recapitalizations and mezzanine alternatives that preserve control.</p>
+        <div class="article-meta">
+          <span>February 2026</span>
+          <span class="read-time">8 min</span>
+        </div>
+      </div>
+
+      <div class="article-card" data-category="research">
+        <span class="article-category research">Sector Research</span>
+        <h3 class="article-title">Cold-Chain Logistics: The Quiet Consolidation Wave</h3>
+        <p class="article-excerpt">Temperature-controlled freight has quietly become one of the most acquisitive corners of U.S. logistics. A look at consolidation drivers, customer concentration risks, and defensible valuation frameworks.</p>
+        <div class="article-meta">
+          <span>January 2026</span>
+          <span class="read-time">11 min</span>
+        </div>
+      </div>
+
+      <div class="article-card" data-category="firm">
+        <span class="article-category firm">Firm News</span>
+        <h3 class="article-title">Veridian Expands Houston Office, Adds Six Analysts</h3>
+        <p class="article-excerpt">In response to continued client demand across the energy and industrials sectors, Veridian has expanded its Houston presence with six new hires across FP&amp;A, Treasury, and Corporate Development.</p>
+        <div class="article-meta">
+          <span>January 2026</span>
+          <span class="read-time">3 min</span>
+        </div>
+      </div>
+
+      <div class="article-card" data-category="market">
+        <span class="article-category market">Market Commentary</span>
+        <h3 class="article-title">2026 M&amp;A Outlook: Themes Worth Watching</h3>
+        <p class="article-excerpt">Our annual sector forecast covering deal volume projections, rate path implications, regulatory headwinds, and the three structural trends that will likely define the year ahead in mid-market advisory.</p>
+        <div class="article-meta">
+          <span>December 2025</span>
+          <span class="read-time">15 min</span>
+        </div>
+      </div>
+
+      <div class="article-card" data-category="research">
+        <span class="article-category research">Sector Research</span>
+        <h3 class="article-title">Steel Fabrication Margins in the Infrastructure Era</h3>
+        <p class="article-excerpt">Federal infrastructure spending has reshaped demand curves for specialty fabricators, but capital expenditure decisions remain fraught. A diagnostic framework for evaluating expansion timing.</p>
+        <div class="article-meta">
+          <span>November 2025</span>
+          <span class="read-time">10 min</span>
+        </div>
+      </div>
+
+      <div class="article-card" data-category="firm">
+        <span class="article-category firm">Firm News</span>
+        <h3 class="article-title">Priya Sundaresan Named to Forbes CTO Next 50</h3>
+        <p class="article-excerpt">Veridian's Chief Technology Officer recognized for her work building the firm's proprietary modeling platform — enabling faster, more rigorous client advisory at scale.</p>
+        <div class="article-meta">
+          <span>November 2025</span>
+          <span class="read-time">2 min</span>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="disclaimer">
+      <strong>Note:</strong> Articles and authors above are hypothetical illustrations created for demonstration purposes and do not represent actual publications.
+    </div>
+
+  </main>
+</div>
+
+<!-- ════════════ FOOTER ════════════ -->
+<footer>
+  <span class="footer-wordmark">
+    <svg class="footer-logo" aria-hidden="true"><use href="#phoenix"/></svg>Veridian Capital Partners
+  </span>
+  <span class="footer-note">Dallas, Texas · Founded 2009</span>
+</footer>
+
+<script>
+  /* Page routing */
+  function showPage(name) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById('page-' + name).classList.add('active');
+    document.querySelectorAll('.nav-link').forEach(l => {
+      l.classList.toggle('active', l.dataset.page === name);
+    });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  /* Dept accordion */
+  function toggleDept(header) {
+    header.closest('.dept-section').classList.toggle('collapsed');
+  }
+
+  /* Scroll to dept + mark tab active */
+  function scrollToDept(id, tab) {
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    document.querySelectorAll('.dept-tab').forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+  }
+
+  /* Highlight active dept tab on scroll */
+  const sections = ['fpa','treasury','mna','control'];
+  const tabs = document.querySelectorAll('.dept-tab');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const idx = sections.indexOf(e.target.id);
+        if (idx >= 0) {
+          tabs.forEach(t => t.classList.remove('active'));
+          tabs[idx].classList.add('active');
+        }
+      }
+    });
+  }, { rootMargin: '-40% 0px -50% 0px' });
+  sections.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) observer.observe(el);
+  });
+
+  /* ═══════ ANIMATED STATS COUNTER ═══════ */
+  function animateValue(el, target, duration = 1600) {
+    const prefix = el.dataset.prefix || '';
+    const suffix = el.dataset.suffix || '';
+    const isYear = el.dataset.format === 'year';
+    const start = isYear ? target - 50 : 0;  // years count up from recent past
+    const startTime = performance.now();
+
+    function tick(now) {
+      const elapsed = now - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      // Ease-out cubic for a nice settling feel
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const current = Math.round(start + (target - start) * eased);
+      el.textContent = prefix + current + suffix;
+      if (progress < 1) requestAnimationFrame(tick);
+      else el.textContent = prefix + target + suffix;
+    }
+    requestAnimationFrame(tick);
+  }
+
+  const statObserver = new IntersectionObserver((entries, obs) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const el = entry.target;
+        const target = parseInt(el.dataset.target, 10);
+        // Reset to start value just before animating
+        const prefix = el.dataset.prefix || '';
+        const suffix = el.dataset.suffix || '';
+        const isYear = el.dataset.format === 'year';
+        el.textContent = prefix + (isYear ? target - 50 : 0) + suffix;
+        animateValue(el, target);
+        obs.unobserve(el);  // only animate once
+      }
+    });
+  }, { threshold: 0.3 });
+
+  document.querySelectorAll('.stat-value[data-target]').forEach(el => statObserver.observe(el));
+
+  /* ═══════ INSIGHTS FILTERING ═══════ */
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const filter = btn.dataset.filter;
+      // update active state
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      // show/hide articles
+      document.querySelectorAll('.article-card, .featured-article').forEach(card => {
+        const cat = card.dataset.category;
+        card.classList.toggle('hidden', filter !== 'all' && cat !== filter);
+      });
+    });
+  });
+</script>
+
+</body>
+</html>
