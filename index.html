@@ -1479,6 +1479,227 @@
     .articles-grid { grid-template-columns: 1fr; }
     footer { flex-direction: column; gap: 8px; text-align: center; }
   }
+
+  /* ═══════════════════════════════════════════════════════
+     FINANCIALS PAGE
+     ═══════════════════════════════════════════════════════ */
+
+  .financials-header {
+    background: var(--ink);
+    position: relative;
+    overflow: hidden;
+    border-bottom: 2px solid var(--gold);
+  }
+  .financials-header-inner {
+    position: relative;
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 52px 48px 44px;
+  }
+  .financials-main {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 56px 48px 80px;
+  }
+
+  .financials-intro {
+    max-width: 720px;
+    margin-bottom: 32px;
+    font-size: 1.1rem;
+    font-weight: 300;
+    line-height: 1.75;
+    color: #3a3028;
+  }
+  .financials-intro em { color: var(--rust); font-style: italic; }
+
+  .pdf-download {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 24px;
+    background: var(--ink);
+    color: var(--cream);
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 1px solid var(--gold);
+    margin-bottom: 56px;
+    transition: background .2s, color .2s;
+  }
+  .pdf-download:hover { background: var(--gold); color: var(--ink); }
+  .pdf-download::before { content: '↓'; font-size: 14px; }
+
+  /* KPI strip */
+  .fs-kpi-strip {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    border: 1px solid var(--rule);
+    background: var(--card-bg);
+    margin-bottom: 48px;
+  }
+  .fs-kpi {
+    padding: 22px 20px;
+    border-right: 1px solid var(--rule);
+    text-align: left;
+  }
+  .fs-kpi:last-child { border-right: none; }
+  .fs-kpi-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+  .fs-kpi-value {
+    font-size: 1.75rem;
+    font-weight: 400;
+    color: var(--ink);
+    line-height: 1.1;
+  }
+  .fs-kpi-value em { color: var(--gold); font-style: normal; }
+  .fs-kpi-sub {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: .08em;
+    color: var(--sage);
+    margin-top: 6px;
+  }
+
+  /* Section heading */
+  .fs-section-title {
+    font-size: 1.85rem;
+    font-weight: 400;
+    color: var(--ink);
+    margin-top: 56px;
+    margin-bottom: 8px;
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 12px;
+  }
+  .fs-section-title em { color: var(--gold); font-style: normal; }
+  .fs-section-sub {
+    font-family: 'DM Mono', monospace;
+    font-size: 9.5px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 20px;
+  }
+
+  /* Tables */
+  .fs-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1.02rem;
+    color: var(--ink);
+    margin-bottom: 8px;
+  }
+  .fs-table thead th {
+    background: var(--ink);
+    color: var(--cream);
+    font-family: 'DM Mono', monospace;
+    font-size: 9.5px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    font-weight: 400;
+    padding: 12px 14px;
+    text-align: right;
+    border-bottom: 2px solid var(--gold);
+  }
+  .fs-table thead th:first-child { text-align: left; }
+  .fs-table tbody td {
+    padding: 8px 14px;
+    border-bottom: 1px solid rgba(200,185,154,.35);
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+  }
+  .fs-table tbody td:first-child { text-align: left; }
+  .fs-table tbody tr.fs-group td {
+    background: rgba(184,147,58,.06);
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--sage);
+    padding-top: 14px;
+    padding-bottom: 8px;
+  }
+  .fs-table tbody tr.fs-indent td:first-child { padding-left: 36px; }
+  .fs-table tbody tr.fs-subtotal td {
+    font-weight: 600;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    background: rgba(244,240,232,.6);
+  }
+  .fs-table tbody tr.fs-total td {
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: var(--ink);
+    background: var(--card-bg);
+    border-top: 2px solid var(--gold);
+    border-bottom: 2px solid var(--ink);
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
+  .fs-table tbody tr.fs-total em { color: var(--gold); font-style: normal; }
+
+  .fs-footnote {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .05em;
+    color: var(--muted);
+    margin-top: 14px;
+    margin-bottom: 32px;
+  }
+
+  /* Ratio grid */
+  .fs-ratio-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-top: 8px;
+  }
+  .fs-ratio-card {
+    border: 1px solid var(--rule);
+    background: var(--card-bg);
+    padding: 20px;
+  }
+  .fs-ratio-card h3 {
+    font-family: 'DM Mono', monospace;
+    font-size: 9.5px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin-bottom: 14px;
+    font-weight: 400;
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 8px;
+  }
+  .fs-ratio-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.98rem;
+    padding: 4px 0;
+    color: var(--ink);
+  }
+  .fs-ratio-row span:last-child {
+    font-variant-numeric: tabular-nums;
+    color: var(--rust);
+  }
+
+  @media (max-width: 720px) {
+    .financials-header-inner, .financials-main { padding-left: 20px; padding-right: 20px; }
+    .fs-kpi-strip { grid-template-columns: repeat(2, 1fr); }
+    .fs-kpi:nth-child(2) { border-right: none; }
+    .fs-kpi:nth-child(-n+2) { border-bottom: 1px solid var(--rule); }
+    .fs-ratio-grid { grid-template-columns: 1fr; }
+    .fs-table { font-size: 0.92rem; }
+    .fs-table thead th, .fs-table tbody td { padding: 8px 8px; }
+  }
 </style>
 </head>
 <body>
@@ -1631,6 +1852,7 @@
       <button class="nav-link" data-page="roles" onclick="showPage('roles')">Roles</button>
       <button class="nav-link" data-page="cases" onclick="showPage('cases')">Case Studies</button>
       <button class="nav-link" data-page="insights" onclick="showPage('insights')">Insights</button>
+      <button class="nav-link" data-page="financials" onclick="showPage('financials')">Financials</button>
     </div>
   </div>
 </nav>
@@ -2397,6 +2619,188 @@
   </main>
 </div>
 
+<!-- ════════════ FINANCIALS PAGE ════════════ -->
+<div class="page" id="page-financials">
+
+  <header class="financials-header">
+    <div class="hero-texture"></div>
+    <div class="financials-header-inner">
+      <p class="header-eyebrow">Investor Information</p>
+      <h1 class="roles-title">Consolidated <em>Financials</em></h1>
+      <p class="header-sub">Fiscal years ended December 31 · 2023 · 2024 · 2025</p>
+    </div>
+  </header>
+
+  <main class="financials-main">
+
+    <p class="financials-intro">
+      Veridian Capital Partners delivered three consecutive years of growth across its advisory franchise. Total revenue expanded from <em>$480.0M</em> in FY2023 to <em>$652.0M</em> in FY2025, supported by an M&amp;A recovery, sustained restructuring mandates, and continued build-out of the firm's capital markets and private funds advisory practices. Figures presented in USD thousands unless otherwise noted.
+    </p>
+
+    <a class="pdf-download" href="Veridian_Capital_Partners_Financial_Statements_FY2023-FY2025.pdf" target="_blank" rel="noopener">
+      Download Full Report (PDF)
+    </a>
+
+    <div class="fs-kpi-strip">
+      <div class="fs-kpi">
+        <div class="fs-kpi-label">FY25 Revenue</div>
+        <div class="fs-kpi-value">$652<em>.0M</em></div>
+        <div class="fs-kpi-sub">+18.5% YoY</div>
+      </div>
+      <div class="fs-kpi">
+        <div class="fs-kpi-label">FY25 Net Income</div>
+        <div class="fs-kpi-value">$99<em>.7M</em></div>
+        <div class="fs-kpi-sub">+21.5% YoY</div>
+      </div>
+      <div class="fs-kpi">
+        <div class="fs-kpi-label">Operating Margin</div>
+        <div class="fs-kpi-value">19<em>.7%</em></div>
+        <div class="fs-kpi-sub">+30 bps YoY</div>
+      </div>
+      <div class="fs-kpi">
+        <div class="fs-kpi-label">Diluted EPS</div>
+        <div class="fs-kpi-value">$2<em>.22</em></div>
+        <div class="fs-kpi-sub">vs. $1.86 prior</div>
+      </div>
+    </div>
+
+    <h2 class="fs-section-title">Statements of <em>Operations</em></h2>
+    <p class="fs-section-sub">For the years ended December 31</p>
+    <table class="fs-table">
+      <thead>
+        <tr><th>($ in thousands)</th><th>FY2023</th><th>FY2024</th><th>FY2025</th></tr>
+      </thead>
+      <tbody>
+        <tr class="fs-group"><td colspan="4">Revenue</td></tr>
+        <tr class="fs-indent"><td>M&amp;A Advisory</td><td>285,000</td><td>342,000</td><td>425,000</td></tr>
+        <tr class="fs-indent"><td>Restructuring Advisory</td><td>95,000</td><td>78,000</td><td>65,000</td></tr>
+        <tr class="fs-indent"><td>Capital Markets Advisory</td><td>62,000</td><td>84,000</td><td>108,000</td></tr>
+        <tr class="fs-indent"><td>Private Funds Advisory</td><td>38,000</td><td>46,000</td><td>54,000</td></tr>
+        <tr class="fs-subtotal"><td>Total revenue</td><td>480,000</td><td>550,000</td><td>652,000</td></tr>
+        <tr class="fs-group"><td colspan="4">Expenses</td></tr>
+        <tr class="fs-indent"><td>Compensation and benefits</td><td>316,800</td><td>363,000</td><td>430,320</td></tr>
+        <tr class="fs-indent"><td>Occupancy &amp; equipment</td><td>22,000</td><td>24,500</td><td>27,800</td></tr>
+        <tr class="fs-indent"><td>Professional fees</td><td>14,500</td><td>16,200</td><td>19,000</td></tr>
+        <tr class="fs-indent"><td>Communications &amp; information services</td><td>11,800</td><td>13,400</td><td>15,600</td></tr>
+        <tr class="fs-indent"><td>Travel &amp; business development</td><td>9,200</td><td>11,500</td><td>13,800</td></tr>
+        <tr class="fs-indent"><td>Depreciation &amp; amortization</td><td>4,500</td><td>5,200</td><td>6,300</td></tr>
+        <tr class="fs-indent"><td>Other operating expenses</td><td>8,000</td><td>9,200</td><td>10,500</td></tr>
+        <tr class="fs-subtotal"><td>Total expenses</td><td>386,800</td><td>443,000</td><td>523,320</td></tr>
+        <tr class="fs-subtotal"><td>Operating income</td><td>93,200</td><td>107,000</td><td>128,680</td></tr>
+        <tr class="fs-indent"><td>Interest and investment income</td><td>4,500</td><td>6,800</td><td>9,200</td></tr>
+        <tr class="fs-indent"><td>Interest expense</td><td>(2,800)</td><td>(2,900)</td><td>(3,100)</td></tr>
+        <tr class="fs-subtotal"><td>Income before income taxes</td><td>94,900</td><td>110,900</td><td>134,780</td></tr>
+        <tr class="fs-indent"><td>Provision for income taxes</td><td>24,674</td><td>28,834</td><td>35,042</td></tr>
+        <tr class="fs-total"><td>Net <em>income</em></td><td>70,226</td><td>82,066</td><td>99,738</td></tr>
+        <tr class="fs-group"><td colspan="4">Earnings per share</td></tr>
+        <tr class="fs-indent"><td>Basic ($)</td><td>$1.68</td><td>$1.93</td><td>$2.31</td></tr>
+        <tr class="fs-indent"><td>Diluted ($)</td><td>$1.63</td><td>$1.86</td><td>$2.22</td></tr>
+      </tbody>
+    </table>
+    <p class="fs-footnote">Compensation ratio held at 66.0% across all three years.</p>
+
+    <h2 class="fs-section-title">Balance <em>Sheets</em></h2>
+    <p class="fs-section-sub">As of December 31</p>
+    <table class="fs-table">
+      <thead>
+        <tr><th>($ in thousands)</th><th>FY2023</th><th>FY2024</th><th>FY2025</th></tr>
+      </thead>
+      <tbody>
+        <tr class="fs-group"><td colspan="4">Assets</td></tr>
+        <tr class="fs-indent"><td>Cash and cash equivalents</td><td>188,726</td><td>261,292</td><td>326,830</td></tr>
+        <tr class="fs-indent"><td>Restricted cash</td><td>8,000</td><td>9,000</td><td>10,500</td></tr>
+        <tr class="fs-indent"><td>Fees receivable, net</td><td>95,000</td><td>112,000</td><td>138,000</td></tr>
+        <tr class="fs-indent"><td>Investments</td><td>32,000</td><td>41,500</td><td>52,000</td></tr>
+        <tr class="fs-indent"><td>Furniture, equipment &amp; leasehold improvements, net</td><td>18,500</td><td>22,000</td><td>26,500</td></tr>
+        <tr class="fs-indent"><td>Operating lease right-of-use assets</td><td>78,000</td><td>82,000</td><td>88,000</td></tr>
+        <tr class="fs-indent"><td>Goodwill and intangible assets, net</td><td>42,000</td><td>42,000</td><td>42,000</td></tr>
+        <tr class="fs-indent"><td>Deferred tax assets</td><td>14,000</td><td>15,500</td><td>17,200</td></tr>
+        <tr class="fs-indent"><td>Other assets</td><td>7,500</td><td>9,000</td><td>10,800</td></tr>
+        <tr class="fs-total"><td>Total <em>assets</em></td><td>483,726</td><td>594,292</td><td>711,830</td></tr>
+        <tr class="fs-group"><td colspan="4">Liabilities</td></tr>
+        <tr class="fs-indent"><td>Accrued compensation and benefits</td><td>198,000</td><td>228,000</td><td>268,000</td></tr>
+        <tr class="fs-indent"><td>Accounts payable and accrued expenses</td><td>28,500</td><td>32,000</td><td>37,000</td></tr>
+        <tr class="fs-indent"><td>Operating lease liabilities</td><td>85,000</td><td>89,500</td><td>95,000</td></tr>
+        <tr class="fs-indent"><td>Notes payable, long-term</td><td>45,000</td><td>60,000</td><td>60,000</td></tr>
+        <tr class="fs-indent"><td>Income taxes payable</td><td>6,800</td><td>8,200</td><td>9,800</td></tr>
+        <tr class="fs-indent"><td>Deferred tax liabilities</td><td>3,200</td><td>3,800</td><td>4,500</td></tr>
+        <tr class="fs-subtotal"><td>Total liabilities</td><td>366,500</td><td>421,500</td><td>474,300</td></tr>
+        <tr class="fs-group"><td colspan="4">Stockholders' equity</td></tr>
+        <tr class="fs-indent"><td>Common stock and additional paid-in capital</td><td>75,000</td><td>79,500</td><td>84,500</td></tr>
+        <tr class="fs-indent"><td>Retained earnings</td><td>52,226</td><td>109,292</td><td>177,030</td></tr>
+        <tr class="fs-indent"><td>Treasury stock</td><td>(10,000)</td><td>(16,000)</td><td>(24,000)</td></tr>
+        <tr class="fs-subtotal"><td>Total stockholders' equity</td><td>117,226</td><td>172,792</td><td>237,530</td></tr>
+        <tr class="fs-total"><td>Total liabilities and <em>equity</em></td><td>483,726</td><td>594,292</td><td>711,830</td></tr>
+      </tbody>
+    </table>
+    <p class="fs-footnote">Balance sheet ties: total assets equal total liabilities plus stockholders' equity in each period.</p>
+
+    <h2 class="fs-section-title">Statements of <em>Cash Flows</em></h2>
+    <p class="fs-section-sub">For the years ended December 31 · Indirect method</p>
+    <table class="fs-table">
+      <thead>
+        <tr><th>($ in thousands)</th><th>FY2023</th><th>FY2024</th><th>FY2025</th></tr>
+      </thead>
+      <tbody>
+        <tr class="fs-group"><td colspan="4">Operating activities</td></tr>
+        <tr class="fs-indent"><td>Net income</td><td>70,226</td><td>82,066</td><td>99,738</td></tr>
+        <tr class="fs-indent"><td>Depreciation and amortization</td><td>4,500</td><td>5,200</td><td>6,300</td></tr>
+        <tr class="fs-indent"><td>Stock-based compensation</td><td>4,500</td><td>4,500</td><td>5,000</td></tr>
+        <tr class="fs-indent"><td>Deferred income taxes</td><td>(1,100)</td><td>(900)</td><td>(1,000)</td></tr>
+        <tr class="fs-indent"><td>Change in fees receivable</td><td>(13,000)</td><td>(17,000)</td><td>(26,000)</td></tr>
+        <tr class="fs-indent"><td>Change in other assets</td><td>(700)</td><td>(1,500)</td><td>(1,800)</td></tr>
+        <tr class="fs-indent"><td>Change in accrued compensation and benefits</td><td>30,000</td><td>30,000</td><td>40,000</td></tr>
+        <tr class="fs-indent"><td>Change in accounts payable and accrued expenses</td><td>3,500</td><td>3,500</td><td>5,000</td></tr>
+        <tr class="fs-indent"><td>Change in income taxes payable</td><td>1,800</td><td>1,400</td><td>1,600</td></tr>
+        <tr class="fs-indent"><td>Operating lease, net</td><td>1,000</td><td>500</td><td>(500)</td></tr>
+        <tr class="fs-subtotal"><td>Net cash from operating activities</td><td>100,726</td><td>107,766</td><td>128,338</td></tr>
+        <tr class="fs-group"><td colspan="4">Investing activities</td></tr>
+        <tr class="fs-indent"><td>Purchases of furniture, equipment &amp; leasehold improvements</td><td>(7,000)</td><td>(8,700)</td><td>(10,800)</td></tr>
+        <tr class="fs-indent"><td>Net purchases of investments</td><td>(4,000)</td><td>(9,500)</td><td>(10,500)</td></tr>
+        <tr class="fs-subtotal"><td>Net cash used in investing activities</td><td>(11,000)</td><td>(18,200)</td><td>(21,300)</td></tr>
+        <tr class="fs-group"><td colspan="4">Financing activities</td></tr>
+        <tr class="fs-indent"><td>Proceeds from (repayments of) notes payable, net</td><td>—</td><td>15,000</td><td>—</td></tr>
+        <tr class="fs-indent"><td>Repurchases of common stock</td><td>(5,000)</td><td>(6,000)</td><td>(8,000)</td></tr>
+        <tr class="fs-indent"><td>Dividends paid</td><td>(30,000)</td><td>(25,000)</td><td>(32,000)</td></tr>
+        <tr class="fs-subtotal"><td>Net cash used in financing activities</td><td>(35,000)</td><td>(16,000)</td><td>(40,000)</td></tr>
+        <tr class="fs-subtotal"><td>Net change in cash, cash equivalents and restricted cash</td><td>54,726</td><td>73,566</td><td>67,038</td></tr>
+        <tr class="fs-indent"><td>Cash and restricted cash, beginning of year</td><td>142,000</td><td>196,726</td><td>270,292</td></tr>
+        <tr class="fs-total"><td>Cash and restricted cash, <em>end of year</em></td><td>196,726</td><td>270,292</td><td>337,330</td></tr>
+      </tbody>
+    </table>
+    <p class="fs-footnote">Cash flow ties: net change in cash and restricted cash reconciles to the period-over-period balance sheet movement.</p>
+
+    <h2 class="fs-section-title">Selected <em>Ratios</em></h2>
+    <p class="fs-section-sub">FY2025 figures · derived from amounts above</p>
+    <div class="fs-ratio-grid">
+      <div class="fs-ratio-card">
+        <h3>Profitability</h3>
+        <div class="fs-ratio-row"><span>Operating margin</span><span>19.7%</span></div>
+        <div class="fs-ratio-row"><span>Pre-tax margin</span><span>20.7%</span></div>
+        <div class="fs-ratio-row"><span>Net margin</span><span>15.3%</span></div>
+        <div class="fs-ratio-row"><span>Effective tax rate</span><span>26.0%</span></div>
+      </div>
+      <div class="fs-ratio-card">
+        <h3>Capital &amp; Returns</h3>
+        <div class="fs-ratio-row"><span>Return on avg. equity</span><span>48.6%</span></div>
+        <div class="fs-ratio-row"><span>Return on avg. assets</span><span>15.3%</span></div>
+        <div class="fs-ratio-row"><span>Long-term debt / equity</span><span>25.3%</span></div>
+        <div class="fs-ratio-row"><span>Dividend payout</span><span>32.1%</span></div>
+      </div>
+      <div class="fs-ratio-card">
+        <h3>Liquidity &amp; Growth</h3>
+        <div class="fs-ratio-row"><span>Cash / total assets</span><span>45.9%</span></div>
+        <div class="fs-ratio-row"><span>Revenue growth (YoY)</span><span>18.5%</span></div>
+        <div class="fs-ratio-row"><span>Operating income growth</span><span>20.3%</span></div>
+        <div class="fs-ratio-row"><span>'23-'25 revenue CAGR</span><span>16.5%</span></div>
+      </div>
+    </div>
+
+    <p class="fs-footnote" style="margin-top:32px;">Figures presented are illustrative and consolidated. All three primary statements have been internally reconciled. Full statements available in the downloadable PDF above.</p>
+
+  </main>
+</div>
+
 <!-- ════════════ FOOTER ════════════ -->
 <footer>
   <span class="footer-wordmark">
@@ -2413,7 +2817,6 @@
     document.querySelectorAll('.nav-link').forEach(l => {
       l.classList.toggle('active', l.dataset.page === name);
     });
-    // Close mobile menu after selection
     closeMenu();
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
@@ -2442,7 +2845,6 @@
     document.body.style.overflow = '';
   }
 
-  /* Close menu if viewport grows past mobile breakpoint */
   window.addEventListener('resize', () => {
     if (window.innerWidth > 720) closeMenu();
   });
@@ -2478,18 +2880,16 @@
     if (el) observer.observe(el);
   });
 
-  /* ═══════ ANIMATED STATS COUNTER ═══════ */
+  /* Animated stats counter */
   function animateValue(el, target, duration = 1600) {
     const prefix = el.dataset.prefix || '';
     const suffix = el.dataset.suffix || '';
     const isYear = el.dataset.format === 'year';
-    const start = isYear ? target - 50 : 0;  // years count up from recent past
+    const start = isYear ? target - 50 : 0;
     const startTime = performance.now();
-
     function tick(now) {
       const elapsed = now - startTime;
       const progress = Math.min(elapsed / duration, 1);
-      // Ease-out cubic for a nice settling feel
       const eased = 1 - Math.pow(1 - progress, 3);
       const current = Math.round(start + (target - start) * eased);
       el.textContent = prefix + current + suffix;
@@ -2504,27 +2904,24 @@
       if (entry.isIntersecting) {
         const el = entry.target;
         const target = parseInt(el.dataset.target, 10);
-        // Reset to start value just before animating
         const prefix = el.dataset.prefix || '';
         const suffix = el.dataset.suffix || '';
         const isYear = el.dataset.format === 'year';
         el.textContent = prefix + (isYear ? target - 50 : 0) + suffix;
         animateValue(el, target);
-        obs.unobserve(el);  // only animate once
+        obs.unobserve(el);
       }
     });
   }, { threshold: 0.3 });
 
   document.querySelectorAll('.stat-value[data-target]').forEach(el => statObserver.observe(el));
 
-  /* ═══════ INSIGHTS FILTERING ═══════ */
+  /* Insights filtering */
   document.querySelectorAll('.filter-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       const filter = btn.dataset.filter;
-      // update active state
       document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
-      // show/hide articles
       document.querySelectorAll('.article-card, .featured-article').forEach(card => {
         const cat = card.dataset.category;
         card.classList.toggle('hidden', filter !== 'all' && cat !== filter);
